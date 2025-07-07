@@ -29,7 +29,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final router = GoRouter(
-    initialLocation: '/slot',
+    initialLocation: '/slot/extra',
     routes: [
       GoRoute(
         path: '/welcome',
@@ -74,6 +74,16 @@ class _MyAppState extends State<MyApp> {
           GoRoute(
             path: 'slot',
             builder: (context, state) => const SlotGamePage(),
+            routes: [
+              GoRoute(
+                path: 'extra',
+                builder: (context, state) => const BombaGamePage(),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: 'thimbles',
+            builder: (context, state) => const ThimblesPage(),
           ),
         ],
       ),
@@ -101,6 +111,6 @@ class _MyAppState extends State<MyApp> {
 │       ├── view/
 │       │   └── login_page.dart
 │       ├── logic/
-│       │   └── auth_controller.dart  # например, Riverpod controller
+│       │   └── auth_controller.dart  # например, Riverpod logic
 │       └── widget/
 │           └── login_form.dart*/

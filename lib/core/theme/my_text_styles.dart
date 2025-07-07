@@ -5,6 +5,13 @@ class MyTextStyles {
   static const _ma = "MontserratAlternates";
   static const _ab = "ArchivoBlack";
 
+  static final TextStyle ma50_700 = TextStyle(
+    fontFamily: _ma,
+    fontSize: 50.r,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
+
   static final TextStyle ma32_700 = TextStyle(
     fontFamily: _ma,
     fontSize: 32.r,
@@ -30,6 +37,27 @@ class MyTextStyles {
     fontFamily: _ma,
     fontSize: 16.r,
     fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
+
+  static final TextStyle ma15_700 = TextStyle(
+    fontFamily: _ma,
+    fontSize: 15.r,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
+
+  static final TextStyle ma14_700 = TextStyle(
+    fontFamily: _ma,
+    fontSize: 14.r,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
+
+  static final TextStyle ma20_400 = TextStyle(
+    fontFamily: _ma,
+    fontSize: 20.r,
+    fontWeight: FontWeight.w400,
     color: Colors.white,
   );
 
