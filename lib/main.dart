@@ -29,7 +29,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final router = GoRouter(
-    initialLocation: '/',
+    initialLocation: '/slot',
     routes: [
       GoRoute(
         path: '/welcome',
@@ -39,7 +39,44 @@ class _MyAppState extends State<MyApp> {
         path: '/loading',
         builder: (context, state) => const LoadingPage(),
       ),
-      GoRoute(path: '/', builder: (context, state) => const MainPage()),
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const MainPage(),
+        routes: [
+          GoRoute(
+            path: 'skins',
+            builder: (context, state) => const SkinsPage(),
+            routes: [
+              GoRoute(
+                path: 'coins',
+                builder: (context, state) => const CoinsPage(),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: 'skills',
+            builder: (context, state) => const SkillsPage(),
+            routes: [
+              GoRoute(
+                path: 'coins',
+                builder: (context, state) => const CoinsPage(),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: 'settings',
+            builder: (context, state) => const SettingsPage(),
+          ),
+          GoRoute(
+            path: 'coins',
+            builder: (context, state) => const CoinsPage(),
+          ),
+          GoRoute(
+            path: 'slot',
+            builder: (context, state) => const SlotGamePage(),
+          ),
+        ],
+      ),
     ],
   );
 

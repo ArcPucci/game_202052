@@ -4,11 +4,13 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/core.dart';
 
-class LeftSideMoneyCounter extends StatelessWidget {
-  const LeftSideMoneyCounter({super.key});
+class RightSideMoneyCounter extends StatelessWidget {
+  const RightSideMoneyCounter({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final route =
+        GoRouter.of(context).routerDelegate.currentConfiguration.fullPath;
     return SizedBox(
       width: 151.r,
       height: 49.r,
@@ -16,16 +18,16 @@ class LeftSideMoneyCounter extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Positioned(
-            right: 0,
+            left: 0,
             child: GestureDetector(
-              onTap: () => context.go('/coins'),
+              onTap: () => context.go('$route/coins'),
               child: Container(
                 width: 37.r,
                 height: 31.r,
                 decoration: BoxDecoration(
                   gradient: MyTheme.redGradient1,
                   borderRadius: BorderRadius.horizontal(
-                    right: Radius.circular(30),
+                    left: Radius.circular(30),
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -47,14 +49,14 @@ class LeftSideMoneyCounter extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 22.r,
+            right: 22.r,
             child: Container(
               width: 98.r,
               height: 49.r,
               decoration: BoxDecoration(
                 gradient: MyTheme.redGradient1,
                 borderRadius: BorderRadius.horizontal(
-                  right: Radius.circular(30),
+                  left: Radius.circular(30),
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -77,7 +79,7 @@ class LeftSideMoneyCounter extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 0,
+            right: 0,
             child: Container(
               width: 49.r,
               height: 49.r,

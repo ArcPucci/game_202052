@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:game_202052/core/core.dart';
-import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:gradient_borders/gradient_borders.dart';
 
-class LabeledButton2 extends StatelessWidget {
-  const LabeledButton2({super.key, required this.label, this.onTap});
+import '../../../../core/core.dart';
 
-  final String label;
+class PriceButton extends StatelessWidget {
+  const PriceButton({super.key, this.onTap});
+
   final VoidCallback? onTap;
 
   @override
@@ -14,12 +14,15 @@ class LabeledButton2 extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 155.w,
-        height: 54.h,
+        width: 283.w,
+        height: 82.h,
         decoration: BoxDecoration(
+          border: GradientBoxBorder(
+            width: 2.sp,
+            gradient: MyTheme.redGradient1,
+          ),
           color: Colors.white,
           borderRadius: BorderRadius.circular(30),
-          border: GradientBoxBorder(gradient: MyTheme.redGradient1, width: 2.sp),
           boxShadow: [
             BoxShadow(
               offset: Offset(8, 8),
@@ -33,7 +36,7 @@ class LabeledButton2 extends StatelessWidget {
           shaderCallback: (Rect bounds) {
             return MyTheme.redGradient1.createShader(bounds);
           },
-          child: Text(label, style: MyTextStyles.ma20_700),
+          child: Text("\$1.50", style: MyTextStyles.ma32_700),
         ),
       ),
     );

@@ -40,6 +40,13 @@ class MyTextStyles {
     color: Colors.white,
   );
 
+  static final TextStyle ma12_400 = TextStyle(
+    fontFamily: _ma,
+    fontSize: 12.r,
+    fontWeight: FontWeight.w400,
+    color: Colors.white,
+  );
+
   static final TextStyle ab24_400 = TextStyle(
     fontFamily: _ab,
     fontSize: 24.r,

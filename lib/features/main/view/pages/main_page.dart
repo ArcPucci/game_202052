@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:game_202052/common/widgets/widgets.dart';
 import 'package:game_202052/features/features.dart';
+import 'package:go_router/go_router.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -43,15 +44,24 @@ class MainPage extends StatelessWidget {
             top: 276.h,
             child: Column(
               children: [
-                LabeledButton1(label: "Settings"),
+                LabeledButton1(
+                  label: "Settings",
+                  onTap: () => context.go('/settings'),
+                ),
                 SizedBox(height: 15.h),
                 SizedBox(
                   width: 320.w,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      LabeledButton2(label: 'Skins'),
-                      LabeledButton2(label: 'Skills'),
+                      LabeledButton2(
+                        label: 'Skins',
+                        onTap: () => context.go('/skins'),
+                      ),
+                      LabeledButton2(
+                        label: 'Skills',
+                        onTap: () => context.go('/skills'),
+                      ),
                     ],
                   ),
                 ),
