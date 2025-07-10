@@ -5,9 +5,18 @@ import 'package:game_202052/features/features.dart';
 import '../../../../core/core.dart';
 
 class SkinCard extends StatelessWidget {
-  const SkinCard({super.key, required this.skinModel});
+  const SkinCard({
+    super.key,
+    required this.skinModel,
+    this.isBought = false,
+    this.trySkin,
+    this.setSkin,
+  });
 
+  final bool isBought;
   final SkinModel skinModel;
+  final VoidCallback? trySkin;
+  final VoidCallback? setSkin;
 
   @override
   Widget build(BuildContext context) {
@@ -40,28 +49,72 @@ class SkinCard extends StatelessWidget {
             child: PriceBox(price: skinModel.skin.price),
           ),
           Positioned(
-            left: 0,
-            right: 0,
+            left: 10.r,
+            right: 10.r,
             bottom: 22.h,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 75.w,
-                  height: 46.h,
-                  decoration: BoxDecoration(
-                    gradient: MyTheme.redGradient1,
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(width: 2.sp, color: Colors.white),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text("Set", style: MyTextStyles.ma16_700),
-                ),
-              ],
-            ),
+            child: _buildButtons(),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildButtons() {
+    if (isBought) {
+      return Center(
+        child: GestureDetector(
+          onTap: setSkin,
+          child: Container(
+            width: 75.w,
+            height: 46.h,
+            decoration: BoxDecoration(
+              gradient: MyTheme.redGradient1,
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(width: 2.sp, color: Colors.white),
+            ),
+            alignment: Alignment.center,
+            child: Text("Set", style: MyTextStyles.ma16_700),
+          ),
+        ),
+      );
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+          onTap: trySkin,
+          child: Container(
+            width: 75.w,
+            height: 46.h,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(width: 2.sp, color: Colors.white),
+            ),
+            alignment: Alignment.center,
+            child: ShaderMask(
+              shaderCallback: (Rect bounds) {
+                return MyTheme.redGradient1.createShader(bounds);
+              },
+              child: Text("Try", style: MyTextStyles.ma16_700),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: setSkin,
+          child: Container(
+            width: 75.w,
+            height: 46.h,
+            decoration: BoxDecoration(
+              gradient: MyTheme.redGradient1,
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(width: 2.sp, color: Colors.white),
+            ),
+            alignment: Alignment.center,
+            child: Text("Buy", style: MyTextStyles.ma16_700),
+          ),
+        ),
+      ],
     );
   }
 }

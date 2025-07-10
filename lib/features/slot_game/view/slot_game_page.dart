@@ -12,6 +12,7 @@ class SlotGamePage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (BuildContext context) {
         return SlotGameController(
+          Provider.of(context, listen: false),
           () => showExtraGameDialog(context),
           (value) => showResultDialog(context, value),
         );

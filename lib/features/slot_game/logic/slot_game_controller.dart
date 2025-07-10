@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:game_202052/common/logic/logic.dart';
 
 class SlotGameController extends ChangeNotifier {
   VoidCallback? _launchMachine;
 
-  SlotGameController(this.showExtraGame, this.showWin);
+  SlotGameController(
+    this._configurationProvider,
+    this.showExtraGame,
+    this.showWin,
+  ) {
+    _currentBet = _configurationProvider.minBet;
+  }
 
+  final ConfigurationProvider _configurationProvider;
   final VoidCallback? showExtraGame;
   final void Function(int win) showWin;
 
@@ -18,7 +26,8 @@ class SlotGameController extends ChangeNotifier {
 
   int get currentBet => _currentBet;
 
-  bool get canIncreaseBet => _currentBet < 10000 && !_isSpinning;
+  bool get canIncreaseBet =>
+      _currentBet + _step <= _configurationProvider.bank && !_isSpinning;
 
   bool get canDecreaseBet => _currentBet > _step && !_isSpinning;
 
@@ -29,6 +38,8 @@ class SlotGameController extends ChangeNotifier {
   }
 
   void spin() {
+    if (_currentBet > _configurationProvider.bank) return;
+    _configurationProvider.addBank(-_currentBet);
     _launchMachine?.call();
     _isSpinning = true;
   }
@@ -38,6 +49,8 @@ class SlotGameController extends ChangeNotifier {
       await Future.delayed(Duration(seconds: 1));
       showWin.call(_currentBet * 100);
       _lastWin = _currentBet * 100;
+      _configurationProvider.addBank(_currentBet * 100);
+      _configurationProvider.setLastWon(_lastWin);
     }
     _isSpinning = false;
     notifyListeners();

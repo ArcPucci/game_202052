@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:game_202052/common/service/service.dart';
 import 'package:game_202052/core/core.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:provider/provider.dart';
 
 import '../view.dart';
 
@@ -127,6 +130,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
   void next() {
     if (titles.length - 1 == currentPage) {
+      context.read<ConfigurationService>().setFirstInit();
+      context.go('/loading');
       return;
     }
 

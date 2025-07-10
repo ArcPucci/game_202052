@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:game_202052/common/logic/logic.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/core.dart';
 
@@ -72,7 +74,11 @@ class LeftSideMoneyCounter extends StatelessWidget {
               padding: EdgeInsets.only(left: 32.r, right: 8.r),
               child: FittedBox(
                 fit: BoxFit.scaleDown,
-                child: Text("0", style: MyTextStyles.ma16_700),
+                child: Consumer<ConfigurationProvider>(
+                  builder: (BuildContext context, value, Widget? child) {
+                    return Text("${value.bank}", style: MyTextStyles.ma16_700);
+                  },
+                ),
               ),
             ),
           ),

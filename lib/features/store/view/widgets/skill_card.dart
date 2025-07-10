@@ -6,7 +6,22 @@ import '../../../../core/core.dart';
 import 'price_box.dart';
 
 class SkillCard extends StatelessWidget {
-  const SkillCard({super.key});
+  const SkillCard({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.number,
+    required this.canBuy,
+    this.onBuy,
+  });
+
+  final String title;
+  final String description;
+  final int price;
+  final int number;
+  final bool canBuy;
+  final VoidCallback? onBuy;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +38,7 @@ class SkillCard extends StatelessWidget {
           Positioned(
             top: 20.h,
             right: 0,
-            child: PriceBox(price: 0, horizontal: 15.r),
+            child: PriceBox(price: price, horizontal: 15.r),
           ),
           Positioned.fill(
             top: 28.h,
@@ -33,16 +48,31 @@ class SkillCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Quick Reflexes", style: MyTextStyles.ma20_700),
+                Text(title, style: MyTextStyles.ma20_700),
                 SizedBox(height: 7.h),
-                Text(
-                  "Increases the character's reaction\ntime to catch falling items",
-                  style: MyTextStyles.ma12_400,
-                ),
+                Text(description, style: MyTextStyles.ma12_400),
                 Spacer(),
-                Align(
-                  alignment: Alignment.center,
-                  child: BorderedButton1(text: "Set"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 155.w,
+                      height: 46.h,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(width: 2.sp, color: Colors.white),
+                      ),
+                      alignment: Alignment.center,
+                      child: ShaderMask(
+                        shaderCallback: (Rect bounds) {
+                          return MyTheme.redGradient1.createShader(bounds);
+                        },
+                        child: Text('$number', style: MyTextStyles.ma16_700),
+                      ),
+                    ),
+                    BorderedButton1(text: "Buy", enabled: canBuy, onTap: onBuy),
+                  ],
                 ),
               ],
             ),

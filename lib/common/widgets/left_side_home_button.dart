@@ -5,12 +5,14 @@ import 'package:go_router/go_router.dart';
 import '../../core/core.dart';
 
 class LeftSideHomeButton extends StatelessWidget {
-  const LeftSideHomeButton({super.key});
+  const LeftSideHomeButton({super.key, this.onTapHome});
+
+  final VoidCallback? onTapHome;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: context.pop,
+      onTap: onTapHome ?? context.pop,
       child: SizedBox(
         width: 120.r,
         height: 49.r,

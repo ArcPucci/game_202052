@@ -12,7 +12,7 @@ class ThimblesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (BuildContext context) {
-        return ThimblesController();
+        return ThimblesController(Provider.of(context, listen: false));
       },
       child: Consumer<ThimblesController>(
         builder: (BuildContext context, value, Widget? child) {

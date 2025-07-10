@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'my_theme.dart';
+
 class MyTextStyles {
   static const _ma = "MontserratAlternates";
   static const _ab = "ArchivoBlack";
@@ -52,6 +54,13 @@ class MyTextStyles {
     fontSize: 14.r,
     fontWeight: FontWeight.w700,
     color: Colors.white,
+  );
+
+  static final TextStyle ma12_700 = TextStyle(
+    fontFamily: _ma,
+    fontSize: 12.r,
+    fontWeight: FontWeight.w700,
+    color: MyTheme.yellow1,
   );
 
   static final TextStyle ma20_400 = TextStyle(

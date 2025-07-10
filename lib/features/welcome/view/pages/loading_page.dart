@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:game_202052/core/theme/theme.dart';
 import 'package:game_202052/features/features.dart';
+import 'package:go_router/go_router.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({super.key});
@@ -19,7 +20,7 @@ class LoadingPage extends StatelessWidget {
             top: 633.h,
             child: Column(
               children: [
-                CustomLoaderBox(),
+                CustomLoaderBox(onCompleted: () => context.go('/')),
                 SizedBox(height: 10.h),
                 Text("LOADING...", style: MyTextStyles.ab24_400),
               ],

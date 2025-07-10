@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/core.dart';
+import '../logic/logic.dart';
 
 class RightSideMoneyCounter2 extends StatelessWidget {
   const RightSideMoneyCounter2({super.key});
@@ -37,7 +39,11 @@ class RightSideMoneyCounter2 extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: FittedBox(
               fit: BoxFit.scaleDown,
-              child: Text("515000", style: MyTextStyles.ma16_700),
+              child: Consumer<ConfigurationProvider>(
+                builder: (BuildContext context, value, Widget? child) {
+                  return Text("${value.bank}", style: MyTextStyles.ma16_700);
+                },
+              ),
             ),
           ),
           Positioned(

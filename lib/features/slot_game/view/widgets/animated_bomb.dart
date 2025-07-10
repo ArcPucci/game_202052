@@ -10,11 +10,15 @@ class AnimatedBomb extends StatefulWidget {
     required this.angle,
     this.hasGold = false,
     this.onCompleted,
+    this.canTap = true,
+    this.onTap,
   });
 
   final bool left;
   final int angle;
   final bool hasGold;
+  final bool canTap;
+  final VoidCallback? onTap;
   final VoidCallback? onCompleted;
 
   @override
@@ -68,10 +72,13 @@ class _AnimatedBombState extends State<AnimatedBomb>
               angle: (-widget.angle * pi) / 180,
               child: GestureDetector(
                 onTap: () async {
+                  if (!widget.canTap) return;
+                  widget.onTap?.call();
                   _controller.forward();
                   _visibleBomb = false;
                   setState(() {});
 
+                  if (!widget.hasGold) return;
                   await Future.delayed(Duration(seconds: 2));
                   widget.onCompleted?.call();
                 },

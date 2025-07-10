@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/core.dart';
+import '../logic/configuration_provider.dart';
 
 class RightSideStarCounter extends StatelessWidget {
   const RightSideStarCounter({super.key});
@@ -34,7 +36,11 @@ class RightSideStarCounter extends StatelessWidget {
               padding: EdgeInsets.only(right: 19.r, left: 5.r),
               child: FittedBox(
                 fit: BoxFit.scaleDown,
-                child: Text("515", style: MyTextStyles.ma16_700),
+                child: Consumer<ConfigurationProvider>(
+                  builder: (BuildContext context, value, Widget? child) {
+                    return Text("${value.stars}", style: MyTextStyles.ma16_700);
+                  },
+                ),
               ),
             ),
           ),

@@ -3,15 +3,18 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:game_202052/common/logic/logic.dart';
 
 import '../../features.dart';
 
 enum ThimblesState { idle, finished, animating, started }
 
 class ThimblesController extends ChangeNotifier {
-  ThimblesController() {
+  ThimblesController(this._configurationProvider) {
     initGame();
   }
+
+  final ConfigurationProvider _configurationProvider;
 
   ThimblesState _state = ThimblesState.idle;
 
@@ -82,6 +85,7 @@ class ThimblesController extends ChangeNotifier {
   void nextRound() async {
     if (betsSum == 0) return;
     if (!_selectedCup) return;
+    _configurationProvider.addBank(-betsSum);
     _state = ThimblesState.started;
     notifyListeners();
 
@@ -112,12 +116,15 @@ class ThimblesController extends ChangeNotifier {
 
     if (_cups[index].hasDice) {
       _streak++;
-      // print(_bets[_cups[index].id]);
       if (_streak == 5) {
+        _configurationProvider.addBank(10000);
         _state = ThimblesState.finished;
         notifyListeners();
         return;
       }
+
+      final res = _bets[_cups[index].id] * getDegree(streak);
+      _configurationProvider.addBank(res);
     } else {
       _streak = 0;
     }
@@ -160,6 +167,7 @@ class ThimblesController extends ChangeNotifier {
   }
 
   void increaseBet(int index) {
+    if (betsSum + _betStep > _configurationProvider.bank) return;
     _bets[index] += _betStep;
     notifyListeners();
   }
@@ -168,5 +176,13 @@ class ThimblesController extends ChangeNotifier {
     if (_bets[index] == 0) return;
     _bets[index] -= _betStep;
     notifyListeners();
+  }
+
+  int getDegree(int b) {
+    int s = 2;
+    for (int i = 0; i < b; i++) {
+      s *= 2;
+    }
+    return s;
   }
 }

@@ -32,4 +32,8 @@ class MyTheme {
       Color(0xFFC03336).withValues(alpha: 0.5),
     ],
   );
+
+  static const Color yellow1 = Color(0xFFCFE42A);
+  static const Color yellow2 = Color(0xFFFF9000);
+  static const Color red1 = Color(0xFFFF2200);
 }

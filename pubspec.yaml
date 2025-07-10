@@ -40,6 +40,9 @@ dependencies:
   gradient_borders: ^1.0.1
   provider: ^6.1.5
   intl: ^0.20.2
+  flame: ^1.30.0
+  holding_gesture: ^1.2.0
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +72,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/png/
+    - assets/images/
     - assets/png/slot/
     - assets/video/
 

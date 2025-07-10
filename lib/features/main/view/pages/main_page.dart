@@ -66,7 +66,7 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 21.r),
-                Game1Button(),
+                Game1Button(onTap: () => context.go('/main')),
                 SizedBox(height: 21.r),
                 SizedBox(
                   width: 331.r,
@@ -79,7 +79,10 @@ class MainPage extends StatelessWidget {
                           SizedBox(height: 7.r),
                           Padding(
                             padding: EdgeInsets.only(right: 5.r),
-                            child: LabeledButton3(label: 'Start'),
+                            child: LabeledButton3(
+                              label: 'Start',
+                              onTap: () => context.go('/slot'),
+                            ),
                           ),
                         ],
                       ),
@@ -89,7 +92,10 @@ class MainPage extends StatelessWidget {
                           SizedBox(height: 7.r),
                           Padding(
                             padding: EdgeInsets.only(left: 5.r),
-                            child: LabeledButton3(label: 'Start'),
+                            child: LabeledButton3(
+                              label: 'Start',
+                              onTap: () => context.go('/thimbles'),
+                            ),
                           ),
                         ],
                       ),

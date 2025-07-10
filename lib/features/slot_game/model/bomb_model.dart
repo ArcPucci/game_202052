@@ -4,7 +4,6 @@ class BombModel {
   final double? right;
   final double? bottom;
   final bool isLeft;
-  final bool hasGold;
   final int angle;
 
   BombModel({
@@ -13,7 +12,6 @@ class BombModel {
     this.right,
     this.bottom,
     this.isLeft = true,
-    this.hasGold = false,
     this.angle = 0,
   });
 }
