@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:game_202052/common/logic/logic.dart';
+import 'package:game_202052/common/service/service.dart';
+import 'package:game_202052/core/core.dart';
 import 'package:game_202052/features/features.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -23,15 +25,18 @@ class _BombaGamePageState extends State<BombaGamePage> {
     BombModel(top: 60.h, left: -80.w, angle: 18),
     BombModel(top: 70.h, right: 20.w, angle: -14, isLeft: false),
     BombModel(top: 230.h, right: -14.w),
-    BombModel(top: 280.h, left: -20.w, angle: -14, isLeft: false),
+    BombModel(top: 250.h, left: -20.w, angle: -14, isLeft: false),
     BombModel(top: 500.h, right: 20.w, angle: 18),
   ];
   int _failTry = 0;
+
+  bool _hasHint = false;
 
   @override
   void initState() {
     super.initState();
     rand = Random().nextInt(bombs.length);
+    _hasHint = context.read<ConfigurationService>().getBombHint();
   }
 
   @override
@@ -93,6 +98,46 @@ class _BombaGamePageState extends State<BombaGamePage> {
               ),
             );
           }),
+          if (_hasHint)
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: () {
+                  _hasHint = false;
+                  context.read<ConfigurationService>().setBombHint();
+                  setState(() {});
+                },
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned.fill(
+                      child: Image.asset(
+                        'assets/png/bomb_bg.png',
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    Positioned(
+                      top: 500.h,
+                      child: SafeArea(
+                        child: Column(
+                          children: [
+                            Text(
+                              "Welcome to the bonus\ngame!",
+                              style: MyTextStyles.ma20_700,
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              "Your task is to guess under which\nbutterfly your bonus is hidden in 3\nattempts. Tap on the butterfly to reveal\nwhat is hidden underneath.",
+                              style: MyTextStyles.ma14_400,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
         ],
       ),
     );

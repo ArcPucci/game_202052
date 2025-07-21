@@ -54,15 +54,21 @@ class LeaderComponent extends PositionComponent {
   FutureOr<void> onLoad() async {
     size = _size;
 
+    final skin = getSkin(game.gameManager.skinID);
+
     _states = {
       for (var state in LeaderStateType.values)
         state: LeaderState(
           itemSize: _size,
-          spritePath: state.spritePath,
+          spritePath:
+              skin.isNotEmpty
+                  ? (state.spritePath.replaceFirst('.png', skin))
+                  : state.spritePath,
           hitboxCreator: state.hitBoxFactory,
         )..priority = 1,
     };
     add(_states[_currentState]!);
+    print(_states[_currentState]!.spritePath);
 
     final left = (game.size.x - size.x) / 2;
     final top = (game.size.y - size.y) / 2 + 50.h;
@@ -86,4 +92,14 @@ class LeaderComponent extends PositionComponent {
   void onHoldRightDown() => _changeState(LeaderStateType.rightDown);
 
   void onCancel() => _changeState(LeaderStateType.idle);
+
+  String getSkin(int id) {
+    return switch (id) {
+      0 => '',
+      1 => '_glass.png',
+      2 => '_chain.png',
+      3 => '_watch.png',
+      _ => '',
+    };
+  }
 }

@@ -69,10 +69,12 @@ class _SkinsPageState extends State<SkinsPage> {
                             final isBought = value.boughtAccessories.contains(
                               skinModel.skin.id,
                             );
+                            final canBuy = value.bank >= skinModel.skin.price;
 
                             return SkinCard(
                               skinModel: skinModel,
                               isBought: isBought,
+                              canBuy: canBuy,
                               trySkin: () {
                                 _id = index;
                                 setState(() {});
@@ -103,10 +105,27 @@ class _SkinsPageState extends State<SkinsPage> {
                   ),
                 ),
               ),
+              _buildHint(value),
             ],
           ),
         );
       },
     );
+  }
+
+  Widget _buildHint(value) {
+    if (value.hints[2]) {
+      return Positioned.fill(
+        child: Hint3Page(onTap: () => value.completeHints(2)),
+      );
+    }
+
+    if (value.hints[3]) {
+      return Positioned.fill(
+        child: Hint4Page(onTap: () => value.completeHints(3)),
+      );
+    }
+
+    return SizedBox();
   }
 }

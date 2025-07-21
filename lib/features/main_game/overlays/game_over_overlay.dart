@@ -50,6 +50,7 @@ class GameOverOverlay extends StatelessWidget {
               top: 525.h,
               child: SafeArea(
                 child: GestureDetector(
+                  onTap: game.retry,
                   child: Container(
                     width: 287.w,
                     height: 74.h,

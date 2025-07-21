@@ -4,3 +4,4 @@ export 'information_overlay.dart';
 export 'skills_overlay.dart';
 export 'game_over_overlay.dart';
 export 'leave_confirmation_overlay.dart';
+export 'intro_overlay.dart';

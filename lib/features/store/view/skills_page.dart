@@ -53,8 +53,9 @@ class SkillsPage extends StatelessWidget {
                                 description:
                                     "Increases the character's reaction\time to catch falling items",
                                 price: 5000,
-                                number: 0,
-                                canBuy: true,
+                                number: value.reflexes,
+                                canBuy: value.bank >= 5000,
+                                onBuy: () => value.buySkill(0),
                               ),
                               SizedBox(height: 15.h),
                               SkillCard(
@@ -62,8 +63,9 @@ class SkillsPage extends StatelessWidget {
                                 description:
                                     'Expands the radius within which\nthe character can catch items',
                                 price: 10000,
-                                number: 0,
-                                canBuy: false,
+                                number: value.extendedReach,
+                                canBuy: value.bank >= 10000,
+                                onBuy: () => value.buySkill(1),
                               ),
                               SizedBox(height: 15.h),
                               SkillCard(
@@ -71,8 +73,9 @@ class SkillsPage extends StatelessWidget {
                                 description:
                                     "Enhances the character's\nmovement speed",
                                 price: 10000,
-                                number: 0,
-                                canBuy: false,
+                                number: value.speedBoost,
+                                canBuy: value.bank >= 10000,
+                                onBuy: () => value.buySkill(2),
                               ),
                             ],
                           );
@@ -83,6 +86,17 @@ class SkillsPage extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          Consumer<ConfigurationProvider>(
+            builder: (context, value, child) {
+              if (value.hints[4]) {
+                return Positioned.fill(
+                  child: Hint5Page(onTap: () => value.completeHints(4)),
+                );
+              }
+
+              return SizedBox();
+            },
           ),
         ],
       ),

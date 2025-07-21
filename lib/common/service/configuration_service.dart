@@ -17,6 +17,8 @@ class ConfigurationService {
   static const _reflexesKey = 'REFLEXES';
   static const _extendedReachKey = 'EXTENDED_REACH';
   static const _speedBoost = 'SPEED_BOOST';
+  static const _bombHint = 'BOMB_HINT';
+  static const _hintsKey = 'HINTS';
 
   Future<void> setBank(int bank) async {
     await _preferences.setInt(_bankKey, bank);
@@ -114,5 +116,24 @@ class ConfigurationService {
 
   int getSpeedBoost() {
     return _preferences.getInt(_speedBoost) ?? 1;
+  }
+
+  Future<void> setBombHint() async {
+    await _preferences.setBool(_bombHint, false);
+  }
+
+  bool getBombHint() {
+    return _preferences.getBool(_bombHint) ?? true;
+  }
+
+  Future<void> setHints(List<bool> hints) async {
+    final map = hints.map((e) => e ? '1' : '0').toList();
+    await _preferences.setStringList(_hintsKey, map);
+  }
+
+  List<bool> getHints() {
+    final map =
+        _preferences.getStringList(_hintsKey) ?? ['1', '1', '1', '1', '1'];
+    return map.map((e) => e == '1').toList();
   }
 }

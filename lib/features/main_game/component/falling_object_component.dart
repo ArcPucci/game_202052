@@ -37,14 +37,14 @@ class FallingObjectComponent extends SpriteComponent with CollisionCallbacks {
   @override
   void update(double dt) {
     super.update(dt);
-    if (game.paused) return;
+    if (game.gameManager.state.value == MainGameState.paused) return;
     if (position.y > game.size.y - 200.h) {
       _remove();
     }
 
     if (!_falling) return;
 
-    position.y += speed * dt;
+    position.y += (game.gameManager.skillId == 2 ? 200 : 250) * dt;
     angle += _angle * dt;
   }
 

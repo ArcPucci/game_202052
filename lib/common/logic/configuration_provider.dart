@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:game_202052/features/features.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../service/configuration_service.dart';
 
@@ -56,7 +57,22 @@ class ConfigurationProvider extends ChangeNotifier {
 
   static const _step = 100;
 
-  void init() {
+  final AudioPlayer _player = AudioPlayer();
+
+  List<bool> _hints = [true, true, true, true, true];
+
+  List<bool> get hints => _hints;
+
+  Future<void> _playMusic() async {
+    try {
+      await _player.setAsset('assets/audio/big_band.mp3');
+      await _player.play();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void init() async {
     _boughtAccessories = _configurationService.getBoughtAccessories();
     _minBet = _configurationService.getMinBet();
     _bank = _configurationService.getBank();
@@ -68,6 +84,8 @@ class ConfigurationProvider extends ChangeNotifier {
     _reflexes = _configurationService.getReflexes();
     _extendedReach = _configurationService.getExtendedReach();
     _speedBoost = _configurationService.getSpeedBoost();
+    _hints = _configurationService.getHints();
+    if (_sound || _music) await _playMusic();
   }
 
   void addBank(int bank) async {
@@ -108,6 +126,8 @@ class ConfigurationProvider extends ChangeNotifier {
     _music = value;
     await _configurationService.setMusic(_music);
     notifyListeners();
+    if (_music && !_sound) await _playMusic();
+    if (!_music && !_sound) await _player.stop();
   }
 
   void toggleSound(bool value) async {
@@ -115,6 +135,8 @@ class ConfigurationProvider extends ChangeNotifier {
     _sound = value;
     await _configurationService.setSound(_sound);
     notifyListeners();
+    if (_sound && !_music) await _playMusic();
+    if (!_sound && !_music) await _player.stop();
   }
 
   Future<bool> setState(Skin skin) async {
@@ -164,22 +186,28 @@ class ConfigurationProvider extends ChangeNotifier {
   void useSkill(int id) async {
     switch (id) {
       case 0:
-        if (_bank < 5000) return;
+        if (_reflexes <= 0) return;
         _reflexes--;
         await _configurationService.setReflexes(_reflexes);
         break;
       case 1:
-        if (_bank < 10000) return;
+        if (_extendedReach <= 0) return;
         _extendedReach--;
         await _configurationService.setExtendedReach(_extendedReach);
         break;
       case 2:
-        if (_bank < 10000) return;
+        if (_speedBoost <= 0) return;
         _speedBoost--;
         await _configurationService.setSpeedBoost(_speedBoost);
         break;
     }
 
+    notifyListeners();
+  }
+
+  void completeHints(int id) async {
+    _hints[id] = false;
+    await _configurationService.setHints(_hints);
     notifyListeners();
   }
 }

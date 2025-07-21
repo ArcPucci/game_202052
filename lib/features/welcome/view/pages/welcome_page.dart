@@ -76,12 +76,21 @@ class _WelcomePageState extends State<WelcomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(3, (index) {
-                        return Container(
+                        final active = index == currentPage;
+                        return AnimatedContainer(
+                          duration: Duration(milliseconds: 300),
                           width: 11.r,
                           height: 11.r,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.white,
+                            color: active ? Colors.white : null,
+                            border:
+                                active
+                                    ? null
+                                    : Border.all(
+                                      width: 1.sp,
+                                      color: Colors.white,
+                                    ),
                           ),
                         );
                       }),

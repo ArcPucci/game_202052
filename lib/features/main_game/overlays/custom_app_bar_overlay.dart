@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:game_202052/features/features.dart';
 
 import '../../../common/widgets/widgets.dart';
 
 class CustomAppBarOverlay extends StatelessWidget {
-  const CustomAppBarOverlay({super.key, this.onTapHome});
+  const CustomAppBarOverlay(this.game, {super.key});
 
-  final VoidCallback? onTapHome;
+  final MyGame game;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class CustomAppBarOverlay extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  LeftSideHomeButton(onTapHome: onTapHome),
+                  LeftSideHomeButton(onTapHome: game.showConfirmation),
                   RightSideStarCounter(),
                 ],
               ),

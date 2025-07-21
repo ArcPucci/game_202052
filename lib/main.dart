@@ -1,18 +1,27 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:game_202052/common/service/configuration_service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'backend_integration.dart';
 import 'common/logic/logic.dart';
 import 'features/features.dart';
 
 void main() {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
+
+    await initBackend();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
     final preferences = await SharedPreferences.getInstance();
     final configProvider = ConfigurationService(preferences);
@@ -45,8 +54,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     final path = widget.configurationService.getFirstInit();
     router = GoRouter(
-      // initialLocation: path ? '/welcome' : '/loading',
-      initialLocation: '/',
+      initialLocation: path ? '/welcome' : '/loading',
       routes: [
         GoRoute(
           path: '/welcome',

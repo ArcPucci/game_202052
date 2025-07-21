@@ -9,11 +9,13 @@ class SkinCard extends StatelessWidget {
     super.key,
     required this.skinModel,
     this.isBought = false,
+    this.canBuy = false,
     this.trySkin,
     this.setSkin,
   });
 
   final bool isBought;
+  final bool canBuy;
   final SkinModel skinModel;
   final VoidCallback? trySkin;
   final VoidCallback? setSkin;
@@ -102,16 +104,19 @@ class SkinCard extends StatelessWidget {
         ),
         GestureDetector(
           onTap: setSkin,
-          child: Container(
-            width: 75.w,
-            height: 46.h,
-            decoration: BoxDecoration(
-              gradient: MyTheme.redGradient1,
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(width: 2.sp, color: Colors.white),
+          child: Opacity(
+            opacity: (canBuy && !isBought) ? 1 : 0.5,
+            child: Container(
+              width: 75.w,
+              height: 46.h,
+              decoration: BoxDecoration(
+                gradient: MyTheme.redGradient1,
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(width: 2.sp, color: Colors.white),
+              ),
+              alignment: Alignment.center,
+              child: Text("Buy", style: MyTextStyles.ma16_700),
             ),
-            alignment: Alignment.center,
-            child: Text("Buy", style: MyTextStyles.ma16_700),
           ),
         ),
       ],

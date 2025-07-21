@@ -38,7 +38,9 @@ class SlotGamePage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              LeftSideHomeButton(),
+                              LeftSideHomeButton(
+                                onTapHome: () => leaveDialog(context),
+                              ),
                               RightSideMoneyCounter2(),
                             ],
                           ),
@@ -100,6 +102,15 @@ class SlotGamePage extends StatelessWidget {
       context: context,
       builder: (context) {
         return ExtraGameDialog();
+      },
+    );
+  }
+
+  void leaveDialog(context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return LeaveDialog();
       },
     );
   }

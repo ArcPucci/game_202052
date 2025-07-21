@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:game_202052/common/logic/logic.dart';
 import 'package:game_202052/common/widgets/widgets.dart';
 import 'package:game_202052/features/features.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/core.dart';
 
@@ -53,40 +55,47 @@ class SkillsOverlay extends StatelessWidget {
                   Expanded(
                     child: SingleChildScrollView(
                       padding: EdgeInsets.only(top: 32.h),
-                      child: Column(
-                        children: [
-                          _SkillCard(
-                            title: 'Quick Reflexes',
-                            body:
-                                "Increases the character's reaction time to catch falling items",
-                            number: 3,
-                          ),
-                          SizedBox(height: 20.h),
-                          Container(
-                            width: 293.w,
-                            height: 1.sp,
-                            color: Colors.white,
-                          ),
-                          SizedBox(height: 20.h),
-                          _SkillCard(
-                            title: 'Extend Reach',
-                            body:
-                                "Expands the radius within which the character can catch items",
-                            number: 3,
-                          ),
-                          SizedBox(height: 20.h),
-                          Container(
-                            width: 293.w,
-                            height: 1.sp,
-                            color: Colors.white,
-                          ),
-                          SizedBox(height: 20.h),
-                          _SkillCard(
-                            title: 'Speed Boost',
-                            body: "Enhances the character's movement speed",
-                            number: 3,
-                          ),
-                        ],
+                      child: Consumer<ConfigurationProvider>(
+                        builder: (BuildContext context, value, Widget? child) {
+                          return Column(
+                            children: [
+                              _SkillCard(
+                                title: 'Quick Reflexes',
+                                body:
+                                    "Increases the character's reaction time to catch falling items",
+                                number: value.reflexes,
+                                onTapUse: () => game.useSkill(0),
+                              ),
+                              SizedBox(height: 20.h),
+                              Container(
+                                width: 293.w,
+                                height: 1.sp,
+                                color: Colors.white,
+                              ),
+                              SizedBox(height: 20.h),
+                              _SkillCard(
+                                title: 'Extend Reach',
+                                body:
+                                    "Expands the radius within which the character can catch items",
+                                number: value.extendedReach,
+                                onTapUse: () => game.useSkill(1),
+                              ),
+                              SizedBox(height: 20.h),
+                              Container(
+                                width: 293.w,
+                                height: 1.sp,
+                                color: Colors.white,
+                              ),
+                              SizedBox(height: 20.h),
+                              _SkillCard(
+                                title: 'Speed Boost',
+                                body: "Enhances the character's movement speed",
+                                number: value.speedBoost,
+                                onTapUse: () => game.useSkill(2),
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                   ),

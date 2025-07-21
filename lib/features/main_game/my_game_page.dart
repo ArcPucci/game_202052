@@ -29,7 +29,7 @@ class _MyGamePageState extends State<MyGamePage> {
                 game: game,
                 overlayBuilderMap: {
                   "appBarOverlay":
-                      (context, game) => const CustomAppBarOverlay(),
+                      (context, game) => CustomAppBarOverlay(game),
                   "gameControllerOverlay":
                       (context, game) => GameControllerOverlay(game),
                   "informationOverlay":
@@ -38,6 +38,8 @@ class _MyGamePageState extends State<MyGamePage> {
                   "gameOverOverlay": (context, game) => GameOverOverlay(game),
                   "leaveConfirmationOverlay":
                       (context, game) => LeaveConfirmationOverlay(game),
+                  "introOverlay":
+                      (context, game) => IntroOverlay(game),
                 },
                 backgroundBuilder: (context) {
                   return Image.asset(

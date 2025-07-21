@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:game_202052/common/logic/logic.dart';
 import 'package:game_202052/common/widgets/widgets.dart';
 import 'package:game_202052/features/features.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -116,6 +118,23 @@ class MainPage extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+          Consumer<ConfigurationProvider>(
+            builder: (context, value, child) {
+              if (value.hints[0]) {
+                return Positioned.fill(
+                  child: Hint1Page(onTap: () => value.completeHints(0)),
+                );
+              }
+
+              if (value.hints[1]) {
+                return Positioned.fill(
+                  child: Hint2Page(onTap: () => value.completeHints(1)),
+                );
+              }
+
+              return SizedBox();
+            },
           ),
         ],
       ),

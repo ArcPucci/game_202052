@@ -5,8 +5,9 @@ import 'package:gradient_borders/gradient_borders.dart';
 import '../../../../core/core.dart';
 
 class PriceButton extends StatelessWidget {
-  const PriceButton({super.key, this.onTap});
+  const PriceButton({super.key, this.onTap, required this.price});
 
+  final String price;
   final VoidCallback? onTap;
 
   @override
@@ -36,7 +37,7 @@ class PriceButton extends StatelessWidget {
           shaderCallback: (Rect bounds) {
             return MyTheme.redGradient1.createShader(bounds);
           },
-          child: Text("\$1.50", style: MyTextStyles.ma32_700),
+          child: Text(price, style: MyTextStyles.ma32_700),
         ),
       ),
     );
