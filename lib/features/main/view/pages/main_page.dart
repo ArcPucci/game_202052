@@ -70,39 +70,37 @@ class MainPage extends StatelessWidget {
                 SizedBox(height: 21.r),
                 Game1Button(onTap: () => context.go('/main')),
                 SizedBox(height: 21.r),
-                SizedBox(
-                  width: 331.r,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Game2Button(),
-                          SizedBox(height: 7.r),
-                          Padding(
-                            padding: EdgeInsets.only(right: 5.r),
-                            child: LabeledButton3(
-                              label: 'Start',
-                              onTap: () => context.go('/slot'),
-                            ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Game2Button(),
+                        SizedBox(height: 7.r),
+                        Padding(
+                          padding: EdgeInsets.only(right: 5.r),
+                          child: LabeledButton3(
+                            label: 'Start',
+                            onTap: () => context.go('/slot'),
                           ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Game3Button(),
-                          SizedBox(height: 7.r),
-                          Padding(
-                            padding: EdgeInsets.only(left: 5.r),
-                            child: LabeledButton3(
-                              label: 'Start',
-                              onTap: () => context.go('/thimbles'),
-                            ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 5.w),
+                    Column(
+                      children: [
+                        Game3Button(),
+                        SizedBox(height: 7.r),
+                        Padding(
+                          padding: EdgeInsets.only(left: 5.r),
+                          child: LabeledButton3(
+                            label: 'Start',
+                            onTap: () => context.go('/thimbles'),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),

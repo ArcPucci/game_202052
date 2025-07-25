@@ -142,7 +142,7 @@ class _FallingItemCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 179.w,
+            width: 179.r,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

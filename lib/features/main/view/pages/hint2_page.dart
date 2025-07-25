@@ -37,33 +37,31 @@ class Hint2Page extends StatelessWidget {
                     SizedBox(height: 22.h),
                     Game1Button(),
                     SizedBox(height: 21.r),
-                    SizedBox(
-                      width: 331.r,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            children: [
-                              Game2Button(),
-                              SizedBox(height: 7.r),
-                              Padding(
-                                padding: EdgeInsets.only(right: 5.r),
-                                child: LabeledButton3(label: 'Start'),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Game3Button(),
-                              SizedBox(height: 7.r),
-                              Padding(
-                                padding: EdgeInsets.only(left: 5.r),
-                                child: LabeledButton3(label: 'Start'),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Game2Button(),
+                            SizedBox(height: 7.r),
+                            Padding(
+                              padding: EdgeInsets.only(right: 5.r),
+                              child: LabeledButton3(label: 'Start'),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 5.w),
+                        Column(
+                          children: [
+                            Game3Button(),
+                            SizedBox(height: 7.r),
+                            Padding(
+                              padding: EdgeInsets.only(left: 5.r),
+                              child: LabeledButton3(label: 'Start'),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),

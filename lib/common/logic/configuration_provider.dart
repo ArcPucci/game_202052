@@ -67,6 +67,7 @@ class ConfigurationProvider extends ChangeNotifier {
     try {
       await _player.setAsset('assets/audio/big_band.mp3');
       await _player.play();
+      _player.setLoopMode(LoopMode.all);
     } catch (e) {
       print(e);
     }
