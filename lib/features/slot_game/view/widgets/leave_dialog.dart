@@ -48,7 +48,7 @@ class LeaveDialog extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: Text(
-                      "Are you sure you want to exit the\ngame? All current progress will be\nlost.",
+                      "Are you sure you want to exit the\ngame?",
                       textAlign: TextAlign.center,
                       style: MyTextStyles.ma14_700,
                     ),
