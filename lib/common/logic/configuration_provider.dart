@@ -86,7 +86,7 @@ class ConfigurationProvider extends ChangeNotifier {
     _extendedReach = _configurationService.getExtendedReach();
     _speedBoost = _configurationService.getSpeedBoost();
     _hints = _configurationService.getHints();
-    if (_sound || _music) await _playMusic();
+    if (_music) await _playMusic();
   }
 
   void addBank(int bank) async {
@@ -127,17 +127,14 @@ class ConfigurationProvider extends ChangeNotifier {
     _music = value;
     await _configurationService.setMusic(_music);
     notifyListeners();
-    if (_music && !_sound) await _playMusic();
-    if (!_music && !_sound) await _player.stop();
+    if (_music) await _playMusic();
+    if (!_music) await _player.stop();
   }
 
   void toggleSound(bool value) async {
-    if (_sound == value) return;
     _sound = value;
     await _configurationService.setSound(_sound);
     notifyListeners();
-    if (_sound && !_music) await _playMusic();
-    if (!_sound && !_music) await _player.stop();
   }
 
   Future<bool> setState(Skin skin) async {
@@ -159,24 +156,24 @@ class ConfigurationProvider extends ChangeNotifier {
   void buySkill(int id) async {
     switch (id) {
       case 0:
-        if (_bank < 5000) return;
+        if (_stars < 5000) return;
         _reflexes++;
-        _bank -= 5000;
-        await _configurationService.setBank(_bank);
+        _stars -= 5000;
+        await _configurationService.setStars(_stars);
         await _configurationService.setReflexes(_reflexes);
         break;
       case 1:
-        if (_bank < 10000) return;
+        if (_stars < 10000) return;
         _extendedReach++;
-        _bank -= 10000;
-        await _configurationService.setBank(_bank);
+        _stars -= 10000;
+        await _configurationService.setStars(_stars);
         await _configurationService.setExtendedReach(_extendedReach);
         break;
       case 2:
-        if (_bank < 10000) return;
+        if (_stars < 10000) return;
         _speedBoost++;
-        _bank -= 10000;
-        await _configurationService.setBank(_bank);
+        _stars -= 10000;
+        await _configurationService.setStars(_stars);
         await _configurationService.setSpeedBoost(_speedBoost);
         break;
     }

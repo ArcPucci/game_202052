@@ -33,7 +33,7 @@ class ConfigurationService {
   }
 
   int getStars() {
-    return _preferences.getInt(_starsKey) ?? 100;
+    return _preferences.getInt(_starsKey) ?? 5000;
   }
 
   Future<void> setLastWon(int lastWon) async {

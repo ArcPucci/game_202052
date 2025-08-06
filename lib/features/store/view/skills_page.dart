@@ -29,7 +29,14 @@ class SkillsPage extends StatelessWidget {
                     width: 330.w,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [LeftSideHomeButton(), RightSideMoneyCounter()],
+                      children: [
+                        LeftSideHomeButton(),
+                        Consumer<ConfigurationProvider>(
+                          builder: (context, value, child) {
+                            return RightSideStarCounter(stars: value.stars);
+                          },
+                        ),
+                      ],
                     ),
                   ),
                   Expanded(
@@ -54,7 +61,7 @@ class SkillsPage extends StatelessWidget {
                                     "Increases the character's reaction\time to catch falling items",
                                 price: 5000,
                                 number: value.reflexes,
-                                canBuy: value.bank >= 5000,
+                                canBuy: value.stars >= 5000,
                                 onBuy: () => value.buySkill(0),
                               ),
                               SizedBox(height: 15.h),
@@ -64,7 +71,7 @@ class SkillsPage extends StatelessWidget {
                                     'Expands the radius within which\nthe character can catch items',
                                 price: 10000,
                                 number: value.extendedReach,
-                                canBuy: value.bank >= 10000,
+                                canBuy: value.stars >= 10000,
                                 onBuy: () => value.buySkill(1),
                               ),
                               SizedBox(height: 15.h),
@@ -74,7 +81,7 @@ class SkillsPage extends StatelessWidget {
                                     "Enhances the character's\nmovement speed",
                                 price: 10000,
                                 number: value.speedBoost,
-                                canBuy: value.bank >= 10000,
+                                canBuy: value.stars >= 10000,
                                 onBuy: () => value.buySkill(2),
                               ),
                             ],

@@ -23,7 +23,12 @@ class CustomAppBarOverlay extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   LeftSideHomeButton(onTapHome: game.showConfirmation),
-                  RightSideStarCounter(),
+                  ValueListenableBuilder(
+                    valueListenable: game.gameManager.score,
+                    builder:
+                        (context, value, child) =>
+                            RightSideStarCounter(stars: value),
+                  ),
                 ],
               ),
             ),

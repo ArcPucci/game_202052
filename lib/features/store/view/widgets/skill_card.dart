@@ -38,7 +38,7 @@ class SkillCard extends StatelessWidget {
           Positioned(
             top: 20.h,
             right: 0,
-            child: PriceBox(price: price, horizontal: 15.r),
+            child: PriceBox(price: price, horizontal: 15.r, isStar: true),
           ),
           Positioned.fill(
             top: 28.h,

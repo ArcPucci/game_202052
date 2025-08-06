@@ -17,7 +17,8 @@ class GameManager extends Component {
   ValueNotifier<int> score = ValueNotifier(0);
   ValueNotifier<MainGameState> state = ValueNotifier(MainGameState.idle);
 
-  int _health = 3;
+  static const int _initHealth = 1;
+  int _health = _initHealth;
 
   ValueNotifier<int> time = ValueNotifier(3);
   ValueNotifier<int> skillTimer = ValueNotifier(0);
@@ -27,10 +28,11 @@ class GameManager extends Component {
   late TimerComponent timerComponent;
 
   void init() {
-    score.value = _configurationProvider.stars;
+    score.value = 0;
     state.value = MainGameState.paused;
     time.value = 3;
-    _health = 3;
+    _health = _initHealth;
+
     timerComponent = TimerComponent(
       period: 1,
       repeat: true,
@@ -79,6 +81,14 @@ class GameManager extends Component {
     state.value = MainGameState.paused;
   }
 
+  void gameOver() {
+    state.value = MainGameState.paused;
+    if (skillTimer.value >= 0 && children.contains(timerComponent)) {
+      skillTimer.value = 0;
+      timerComponent.removeFromParent();
+    }
+  }
+
   void resumeGame() {
     state.value = MainGameState.playing;
   }
@@ -86,9 +96,10 @@ class GameManager extends Component {
   void addScore(int points) {
     if (points < 0) _health--;
     score.value += points;
-    _configurationProvider.addStars(points);
 
     if (_health > 0) return;
+
+    _configurationProvider.addStars(score.value);
     state.value = MainGameState.paused;
     game.gameOver();
   }

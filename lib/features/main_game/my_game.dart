@@ -47,12 +47,13 @@ class MyGame extends FlameGame with HasCollisionDetection {
   void startGame() async {
     overlays.remove('introOverlay');
 
+    leaderComponent.onCancel();
     add(leaderComponent);
     add(fallingObjectsManager);
   }
 
   void gameOver() {
-    gameManager.pauseGame();
+    gameManager.gameOver();
     fallingObjectsManager.removeFromParent();
     leaderComponent.removeFromParent();
 

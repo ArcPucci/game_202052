@@ -112,7 +112,14 @@ class MainPage extends StatelessWidget {
                 width: 330.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [LeftSideMoneyCounter(), RightSideStarCounter()],
+                  children: [
+                    LeftSideMoneyCounter(),
+                    Consumer<ConfigurationProvider>(
+                      builder: (context, value, child) {
+                        return RightSideStarCounter(stars: value.stars);
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),

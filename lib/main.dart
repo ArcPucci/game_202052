@@ -16,7 +16,7 @@ void main() {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    await initBackend();
+    // await initBackend();
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
