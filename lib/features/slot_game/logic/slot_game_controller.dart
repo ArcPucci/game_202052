@@ -38,6 +38,7 @@ class SlotGameController extends ChangeNotifier {
   }
 
   void spin() {
+    if(_isSpinning) return;
     if (_currentBet > _configurationProvider.bank) return;
     _configurationProvider.addBank(-_currentBet);
     _launchMachine?.call();
@@ -47,10 +48,16 @@ class SlotGameController extends ChangeNotifier {
   void checkResult(int? comb) async {
     if (comb != null) {
       await Future.delayed(Duration(seconds: 1));
-      showWin.call(_currentBet * 100);
-      _lastWin = _currentBet * 100;
-      _configurationProvider.addBank(_currentBet * 100);
-      _configurationProvider.setLastWon(_lastWin);
+
+      if(comb == 0 || comb == 1) {
+        showExtraGame?.call();
+      } else {
+        showWin.call(_currentBet * 100);
+
+        _lastWin = _currentBet * 100;
+        _configurationProvider.addBank(_currentBet * 100);
+        _configurationProvider.setLastWon(_lastWin);
+      }
     }
     _isSpinning = false;
     notifyListeners();
